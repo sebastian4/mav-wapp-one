@@ -2,28 +2,38 @@ package com.slpz.mvwone;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.log4j.PropertyConfigurator;
 
 @Path("/good")
 public class GoodDayService {
     
+    Logger log = Logger.getLogger(GoodDayService.class.getName()); 
+    
+//    @Context 
+//    ServletContext sc; 
+
 //    public GoodDayService() {
 //        System.out.println("GoodDayService()");
 //    }
     
     @PostConstruct
     public void initializing() {
-      System.out.println("initializing()");
+        log.debug("initializing()");
     }
     
     @GET
     @Path("/morning/{param}")
     public Response getMorning(@PathParam("param") String msg) {
             
-            System.out.println("getMorning("+msg+")");
+            log.debug("getMorning("+msg+")");
             
             String output = "Good Morning " + msg;
 
@@ -34,7 +44,7 @@ public class GoodDayService {
     @Path("/afternoon/{param}")
     public Response getAfternoon(@PathParam("param") String msg) {
 
-            System.out.println("getAfternoon("+msg+")");
+            log.debug("getAfternoon("+msg+")");
             
             String output = "Good Afternoon " + msg;
 
@@ -42,8 +52,8 @@ public class GoodDayService {
     }
     
     @PreDestroy
-	public void cleanUp() throws Exception {
-	  System.out.println("cleanUp()");
+    public void cleanUp() throws Exception {
+	  log.debug("cleanUp()");
     }
     
 }
