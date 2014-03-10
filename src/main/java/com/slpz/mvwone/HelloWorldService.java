@@ -7,7 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
- 
+import com.slpz.mvjvutlone.Something;
+
 @Path("/hello")
 public class HelloWorldService {
 
@@ -24,7 +25,7 @@ public class HelloWorldService {
 
             log.debug("getMsg("+msg+")");
             
-            String output = "Jersey say : " + msg;
+            String output = "Jersey say : " + msg + " ... " + Something.saySomething();
 
             return Response.status(200).entity(output).build();
     }
