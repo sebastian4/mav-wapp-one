@@ -9,31 +9,32 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import com.slpz.mvjutlone.Track;
 import javax.ws.rs.PathParam;
 import org.apache.log4j.Logger;
+import com.slpz.mvjvutlone.model.Track;
+import com.slpz.mvjvutlone.dto.TrackDto;
 
 @Path("/json/track")
 public class JsonTrackService {
     
     Logger log = Logger.getLogger(JsonTrackService.class.getName());
+    TrackDto trackDto = null;
     
     @PostConstruct
-    public void initializing() {
-        log.debug("initializing()");
+    public void initialize() {
+        log.debug("initializing");
+        trackDto = new TrackDto();
     }
     
     @GET
     @Path("/get/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Track getTrackInJSON(@PathParam("name") String name) {
-
-            log.debug("getTrackInJSON("+name+")");
+            log.debug("input:"+name);
             
-            Track track = new Track();
-            track.setTitle("Enter Sandman");
-            track.setSinger(name);
+            Track track = trackDto.getTrackInJSON(name);
 
+            log.debug("output: "+track);
             return track;
     }
 
@@ -41,16 +42,17 @@ public class JsonTrackService {
     @Path("/post")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createTrackInJSON(Track track) {
-
-            log.debug("createTrackInJSON("+track+")");
+            log.debug("input: "+track);
             
-            String result = "Track saved : " + track;
+            String result = trackDto.createTrackInJSON(track);
+            
+            log.debug("output: "+result);
             return Response.status(201).entity(result).build();
     }
     
     @PreDestroy
     public void cleanUp() throws Exception {
-	  log.debug("cleanUp()");
+	  log.debug("cleaning up");
     }
     
 }
