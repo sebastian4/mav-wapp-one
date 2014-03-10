@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import com.slpz.mvjvutlone.model.Track;
 import com.slpz.mvjvutlone.dto.TrackDto;
 
-@Path("/json/track")
+@Path("/track")
 public class JsonTrackService {
     
     Logger log = Logger.getLogger(JsonTrackService.class.getName());
@@ -27,7 +27,7 @@ public class JsonTrackService {
     }
     
     @GET
-    @Path("/get/{name}")
+    @Path("/{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Track getTrackInJSON(@PathParam("name") String name) {
             log.debug("input:"+name);
@@ -39,7 +39,7 @@ public class JsonTrackService {
     }
 
     @POST
-    @Path("/post")
+    @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createTrackInJSON(Track track) {
             log.debug("input: "+track);
