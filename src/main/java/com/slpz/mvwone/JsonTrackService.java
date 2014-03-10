@@ -27,12 +27,12 @@ public class JsonTrackService {
     }
     
     @GET
-    @Path("/{name}")
+    @Path("/title/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Track getTrackInJSON(@PathParam("name") String name) {
+    public Track getTrackByTitle(@PathParam("name") String name) {
             log.debug("input:"+name);
             
-            Track track = trackDto.getTrackInJSON(name);
+            Track track = trackDto.getTrackByTitle(name);
 
             log.debug("output: "+track);
             return track;
@@ -41,10 +41,10 @@ public class JsonTrackService {
     @POST
     @Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createTrackInJSON(Track track) {
+    public Response createTrack(Track track) {
             log.debug("input: "+track);
             
-            String result = trackDto.createTrackInJSON(track);
+            String result = trackDto.createTrack(track);
             
             log.debug("output: "+result);
             return Response.status(201).entity(result).build();
