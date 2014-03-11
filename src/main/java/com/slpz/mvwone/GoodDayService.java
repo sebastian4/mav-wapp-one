@@ -7,14 +7,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
-import com.slpz.mvjvutlone.dto.GoodDayDto;
+import com.slpz.mvjvutlone.dto.GoodDayApi;
 
 @Path("/good")
 public class GoodDayService {
     
     Logger log = Logger.getLogger(GoodDayService.class.getName());
     
-    GoodDayDto goodDayDto = null;
+    GoodDayApi goodDayApi = null;
     
 //    @Context 
 //    ServletContext sc; 
@@ -26,7 +26,7 @@ public class GoodDayService {
     @PostConstruct
     public void initialize() {
         log.debug("initializing");
-        goodDayDto = new GoodDayDto();
+        goodDayApi = new GoodDayApi();
     }
     
     @GET
@@ -34,7 +34,7 @@ public class GoodDayService {
     public Response getMorning(@PathParam("param") String msg) {
             log.debug("input: "+msg);
             
-            String output = goodDayDto.getMorning(msg);
+            String output = goodDayApi.getMorning(msg);
 
             log.debug("output: "+output);
             return Response.status(200).entity(output).build();
@@ -45,7 +45,7 @@ public class GoodDayService {
     public Response getAfternoon(@PathParam("param") String msg) {
             log.debug("input: "+msg);
             
-            String output = goodDayDto.getAfternoon(msg);
+            String output = goodDayApi.getAfternoon(msg);
 
             log.debug("output: "+output);
             return Response.status(200).entity(output).build();
